@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.Views.KeyRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmEncrypter_PublicVersion"
+             xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:KeyRegistrationViewModel}"
+             d:DesignHeight="396" d:DesignWidth="344">
+    <UserControl.Resources>
+        <Style x:Key="KeyHintBorder" TargetType="Border" BasedOn="{StaticResource Border.TextBlock.AnimatedVisibility}">
+            <Setter Property="Visibility" Value="Visible"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=Text}" Value="">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock" BasedOn="{StaticResource SmallText}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=SelectedValue}" Value="{x:Static local:Bits._128}" >
+                    <Setter Property="Text" Value="{DynamicResource KeyHint128}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=SelectedValue}" Value="{x:Static local:Bits._256}" >
+                    <Setter Property="Text" Value="{DynamicResource KeyHint256}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=SelectedValue}" Value="{x:Static local:Bits._512}" >
+                    <Setter Property="Text" Value="{DynamicResource KeyHint512}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=SelectedValue}" Value="{x:Static local:Bits._1024}" >
+                    <Setter Property="Text" Value="{DynamicResource KeyHint1024}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=KeySize, Path=SelectedValue}" Value="{x:Static local:Bits._2048}" >
+                    <Setter Property="Text" Value="{DynamicResource KeyHint2048}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Border.StackPanel}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource HeaderTextBlock}" HorizontalAlignment="Center" Text="{DynamicResource CreateKey}" />
+            <Separator DockPanel.Dock="Top"/>
+            <Grid>
+                <local:WaitingPanel>
+                    <i:Interaction.Behaviors>
+                        <local:ChangeVisibilityBehavior IsBusy="{Binding IsBusy}"
+                                                        CollapsedElement="{Binding ElementName=ContentGrid}"/>
+                    </i:Interaction.Behaviors>
+                </local:WaitingPanel>
+                <Grid x:Name="ContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Margin="40,20,40,0">
+                        <ComboBox x:Name="KeySize" Margin="5,4" 
+                                  ItemsSource="{Binding KeySizes}" 
+                                  SelectedValuePath="Key" 
+                                  DisplayMemberPath="Value" 
+                                  SelectedValue="{Binding ChosenKeySize}" />
+                        <Border Margin="5,4" Style="{StaticResource KeyHintBorder}" >
+                            <TextBlock x:Name="KeyHint" TextWrapping="Wrap" TextAlignment="Justify" />
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Margin="40,0">
+                        <Button Margin="5" Content="{DynamicResource Generate}" Command="{Binding RegisterKeyCommand}" IsDefault="True"/>
+                        <Button Margin="5" Command="{Binding CancelCommand}" Content="{DynamicResource Cancel}" IsCancel="True"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Border>
+</UserControl>

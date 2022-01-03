@@ -1,0 +1,26 @@
+﻿<Window x:Class="RmEncrypter_PublicVersion.Views.MainShell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RmEncrypter_PublicVersion"
+        xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainShellViewModel}"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="RmEncrypter"
+        Height="450" Width="800"
+        MinHeight="260" MinWidth="520"
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen">
+    <i:Interaction.Behaviors>
+        <local:WindowClosingBehavior CanClose="{Binding CanClose}" />
+    </i:Interaction.Behaviors>
+    <DockPanel>
+        <ContentControl Focusable="False" prism:RegionManager.RegionName="{x:Static local:AppRegions.TopRegion}" DockPanel.Dock="Top"/>
+        <ContentControl Focusable="False" prism:RegionManager.RegionName="{x:Static local:AppRegions.BottomRegion}" DockPanel.Dock="Bottom"/>
+        <ContentControl Focusable="False" prism:RegionManager.RegionName="{x:Static local:AppRegions.ContentRegion}"/>
+    </DockPanel>
+</Window>

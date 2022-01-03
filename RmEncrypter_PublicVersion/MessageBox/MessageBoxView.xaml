@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.MessageBox.MessageBoxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:messageBox="clr-namespace:RmEncrypter_PublicVersion.MessageBox"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=messageBox:MessageBoxViewModel}"
+             MinHeight="150" MinWidth="250" MaxWidth="500">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="Title" Value="{Binding Title}"/>
+            <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <DockPanel>
+        <Border Margin="10" Style="{StaticResource Border.StackPanel}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.ColumnSpan="3">
+                    <Border Margin="5" Style="{StaticResource Border.TextBlock}">
+                        <TextBlock Padding="10"
+                                   Style="{StaticResource NormalText}"
+                                   Text="{Binding Message}"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center" />
+                    </Border>
+                </StackPanel>
+                <Button Grid.Row="2" Margin="5" Command="{Binding CloseDialogCommand}" IsDefault="True">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNoCancel}">
+                                    <Setter Property="Content" Value="{DynamicResource Yes}" />
+                                    <Setter Property="Grid.Column" Value="0"/>
+                                    <Setter Property="CommandParameter" Value="yes"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNo}">
+                                    <Setter Property="Content" Value="{DynamicResource Yes}" />
+                                    <Setter Property="Grid.Column" Value="0"/>
+                                    <Setter Property="CommandParameter" Value="yes"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OK}">
+                                    <Setter Property="Content" Value="{DynamicResource Ok}" />
+                                    <Setter Property="Grid.Column" Value="1"/>
+                                    <Setter Property="CommandParameter" Value="ok"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OKCancel}">
+                                    <Setter Property="Content" Value="{DynamicResource Ok}" />
+                                    <Setter Property="Grid.Column" Value="0"/>
+                                    <Setter Property="CommandParameter" Value="ok"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Row="2" Margin="5" Command="{Binding CloseDialogCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNoCancel}">
+                                    <Setter Property="Content" Value="{DynamicResource No}" />
+                                    <Setter Property="Grid.Column" Value="1"/>
+                                    <Setter Property="CommandParameter" Value="no"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNo}">
+                                    <Setter Property="Content" Value="{DynamicResource No}" />
+                                    <Setter Property="Grid.Column" Value="2"/>
+                                    <Setter Property="CommandParameter" Value="no"/>
+                                    <Setter Property="IsCancel" Value="True"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OK}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OKCancel}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Grid.Row="2" Margin="5" Command="{Binding CloseDialogCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNoCancel}">
+                                    <Setter Property="Content" Value="{DynamicResource Cancel}" />
+                                    <Setter Property="Grid.Column" Value="2"/>
+                                    <Setter Property="CommandParameter" Value="cancel"/>
+                                    <Setter Property="IsCancel" Value="True"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.YesNo}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OK}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Buttons}" Value="{x:Static MessageBoxButton.OKCancel}">
+                                    <Setter Property="Content" Value="{DynamicResource Cancel}" />
+                                    <Setter Property="Grid.Column" Value="2"/>
+                                    <Setter Property="CommandParameter" Value="cancel"/>
+                                    <Setter Property="IsCancel" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
+    </DockPanel>
+</UserControl>

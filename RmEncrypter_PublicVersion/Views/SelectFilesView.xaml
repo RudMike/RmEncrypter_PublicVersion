@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.Views.SelectFilesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmEncrypter_PublicVersion"
+             xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:SelectFilesViewModel}"
+             d:DesignHeight="396" d:DesignWidth="344"
+             AllowDrop="True">
+    <i:Interaction.Behaviors>
+        <local:DropToCommandBehavior Command="{Binding AddFilesCommand}" Extensions="{Binding SupportedExtensions, Mode=OneWay}" IsSingle="False"/>
+    </i:Interaction.Behaviors>
+    <UserControl.Resources>
+        <local:VisibleWhenZeroConverter x:Key="VisibleWhenZeroConverter"/>
+        <sys:Boolean x:Key="True">true</sys:Boolean>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Border.StackPanel}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource HeaderTextBlock}" Text="{DynamicResource SelectFiles}" />
+            <Separator DockPanel.Dock="Top"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Margin="5" Style="{StaticResource Border.TextBlock}" 
+                        Visibility="{Binding SelectedFiles.Count, Converter={StaticResource VisibleWhenZeroConverter}}">
+                    <TextBlock Margin="5,2.5"
+                               Text="{DynamicResource AddFilesReencrypt}"
+                               TextAlignment="Justify"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource NormalText}"/>
+                </Border>
+
+                <ListBox Grid.Row="1"
+                         ItemsSource="{Binding SelectedFiles}" 
+                         Tag="{Binding DataContext, RelativeSource={RelativeSource Mode=Self}}"
+                         Visibility="{Binding SelectedFiles.Count, Converter={StaticResource VisibleWhenZeroConverter}, ConverterParameter={StaticResource True}}">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{DynamicResource DeleteFromList}"
+                                      Command="{Binding PlacementTarget.Tag.RemoveFromListCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                      CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+
+                <StackPanel Margin="40,0" Grid.Row="2">
+                    <Button Margin="5" Command="{Binding OpenFileDialogCommand}" Content="{DynamicResource Add}" IsDefault="True"/>
+                    <Button Margin="5" Command="{Binding ContinueCommand}" Content="{DynamicResource Continue}"/>
+                    <Button Margin="5" Command="{Binding CancelCommand}" Content="{DynamicResource Cancel}" IsCancel="True"/>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </Border>
+</UserControl>

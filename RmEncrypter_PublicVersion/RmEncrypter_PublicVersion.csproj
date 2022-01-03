@@ -1,0 +1,132 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\ProgramIcon.ico</ApplicationIcon>
+    <Authors>Mike Rudnikov</Authors>
+    <Company>Mike Rudnikov</Company>
+    <Description>The application to store your login data in an encrypted form. It is a public version of the RmEncrypter and is presented for information purposes</Description>
+    <Copyright>Copyright © Mike Rudnikov, 2022</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/RudMike/RmEncrypter_PublicVersion</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>G:\Projects\RmEncrypter_PublicVersion\RmEncrypter_PublicVersion\RmEncrypter_PublicVersion.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Roboto\Roboto-Black.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Bold.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Italic.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Light.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-LightItalic.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Medium.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Regular.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-Thin.ttf" />
+    <None Remove="Fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <None Remove="Resources\Gifs\Waiting_256.gif" />
+    <None Remove="Resources\Icons\Add_64.png" />
+    <None Remove="Resources\Icons\CopyIcon.ico" />
+    <None Remove="Resources\Icons\DeleteIcon.ico" />
+    <None Remove="Resources\Icons\Logout_64.png" />
+    <None Remove="Resources\Icons\OpenAnotherFile_64.png" />
+    <None Remove="Resources\Icons\OpenInBrowser_32.png" />
+    <None Remove="Resources\Icons\ProgramIcon.ico" />
+    <None Remove="Resources\Icons\Save_64.png" />
+    <None Remove="Resources\Icons\Setting_64.png" />
+    <None Remove="Resources\SplashScreen.png" />
+    <None Remove="stylecop.json" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Gifs\Waiting_256.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Add_64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\CopyIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\DeleteIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Logout_64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OpenAnotherFile_64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\OpenInBrowser_32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\ProgramIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Save_64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\Setting_64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.13" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Roboto\Roboto-Black.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Bold.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Italic.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Light.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-LightItalic.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Medium.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Regular.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-Thin.ttf" />
+    <Resource Include="Fonts\Roboto\Roboto-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\SplashScreen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

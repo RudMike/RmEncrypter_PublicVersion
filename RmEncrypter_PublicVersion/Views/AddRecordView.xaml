@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.Views.AddRecordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+             xmlns:prism="http://prismlibrary.com/"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddRecordViewModel}"
+             d:DesignHeight="522" d:DesignWidth="404"
+             Height="auto">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="Title" Value="{Binding Title}"/>
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+    <Border Style="{StaticResource Border.StackPanel}" Margin="20,10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Style="{StaticResource HeaderTextBlock}" HorizontalAlignment="Center" Text="{DynamicResource AddNewRecord}" />
+                <Separator/>
+            </StackPanel>
+            <StackPanel Margin="5,0" Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" BasedOn="{StaticResource NormalText}">
+                        <Setter Property="Margin" Value="5,5,5,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="{DynamicResource Site}" />
+                <TextBox Margin="5" Text="{Binding SiteAuthData.Site, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{DynamicResource Username}" />
+                <TextBox Margin="5" Text="{Binding SiteAuthData.UserName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="{DynamicResource Password}" />
+                <TextBox Margin="5" Text="{Binding SiteAuthData.Password, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Margin="5,5,5,0" Text="{DynamicResource Note}" Style="{StaticResource NormalText}"/>
+                <TextBox x:Name="Note"
+                         Text="{Binding SiteAuthData.Note, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="5"
+                         Height="auto"
+                         TextWrapping="Wrap"
+                         MaxLength="{Binding SiteAuthData.NoteMaxLength}" />
+                <TextBlock HorizontalAlignment="Right">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}/{1}">
+                            <Binding ElementName="Note" Path="Text.Length"/>
+                            <Binding ElementName="Note" Path="MaxLength"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+
+            <Grid Margin="5,0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Margin="5,0" Content="{DynamicResource Add}" Command="{Binding AddCommand}" IsDefault="True"/>
+                <Button Grid.Column="1" Margin="5,0" Content="{DynamicResource Cancel}" Command="{Binding CancelCommand}" IsCancel="True"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

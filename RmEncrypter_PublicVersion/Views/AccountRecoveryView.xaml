@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.Views.AccountRecoveryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmEncrypter_PublicVersion"
+             xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AccountRecoveryViewModel}"
+             d:DesignHeight="396" d:DesignWidth="344">
+    <UserControl.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <sys:Boolean x:Key="False">false</sys:Boolean>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Border.StackPanel}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top"
+                       Style="{StaticResource HeaderTextBlock}"
+                       Text="{DynamicResource AccountRecovery}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+            <Separator DockPanel.Dock="Top"/>
+            <Grid>
+                <local:WaitingPanel>
+                    <i:Interaction.Behaviors>
+                        <local:ChangeVisibilityBehavior IsBusy="{Binding IsBusy}"
+                                                        CollapsedElement="{Binding ElementName=ContentGrid}"/>
+                    </i:Interaction.Behaviors>
+                </local:WaitingPanel>
+
+                <Grid x:Name="ContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="40,10,40,0">
+                        <TextBlock Text="{DynamicResource InputRecoveringAccount}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Left"
+                               Style="{StaticResource NormalText}"
+                               Margin="5"
+                               Visibility="{Binding IsUseFileAuthData, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                        <TextBox Margin="5" Text="{Binding UserName}">
+                            <local:WatermarkService.Watermark>
+                                <TextBlock Text="{DynamicResource Username}" Style="{StaticResource Watermark}"/>
+                            </local:WatermarkService.Watermark>
+                        </TextBox>
+
+                        <PasswordBox Margin="5" local:BindablePassword.Password="{Binding UserPassword, Mode=TwoWay}">
+                            <local:WatermarkService.Watermark>
+                                <TextBlock Text="{DynamicResource Password}" Style="{StaticResource Watermark}"/>
+                            </local:WatermarkService.Watermark>
+                        </PasswordBox>
+
+                        <PasswordBox Margin="5"
+                                 local:BindablePassword.Password="{Binding UserRepeatedPassword, Mode=OneWayToSource}"
+                                 Visibility="{Binding IsUseFileAuthData, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter={StaticResource False}}">
+                            <local:WatermarkService.Watermark>
+                                <TextBlock Text="{DynamicResource ConfirmPassword}" Style="{StaticResource Watermark}"/>
+                            </local:WatermarkService.Watermark>
+                        </PasswordBox>
+                    </StackPanel>
+
+                    <StackPanel Margin="40,0" Grid.Row="2">
+                        <Button Margin="5" Command="{Binding RecoveryCommand}" Content="{DynamicResource Recovery}" IsDefault="True"/>
+                        <Button Margin="5" Command="{Binding CancelCommand}" Content="{DynamicResource Cancel}" IsCancel="True"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Border>
+</UserControl>

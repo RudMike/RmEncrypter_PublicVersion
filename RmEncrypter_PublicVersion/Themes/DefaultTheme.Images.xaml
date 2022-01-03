@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ImageSource x:Key="WaitingGif">pack://application:,,,/Resources/Gifs/Waiting_256.gif</ImageSource>
+    <ImageSource x:Key="LogoutPng">pack://application:,,,/Resources/Icons/Logout_64.png</ImageSource>
+    <ImageSource x:Key="SettingPng">pack://application:,,,/Resources/Icons/Setting_64.png</ImageSource>
+    <ImageSource x:Key="CopyIco">pack://application:,,,/Resources/Icons/CopyIcon.ico</ImageSource>
+    <ImageSource x:Key="OpenInBrowserPng">pack://application:,,,/Resources/Icons/OpenInBrowser_32.png</ImageSource>
+    <ImageSource x:Key="SavePng">pack://application:,,,/Resources/Icons/Save_64.png</ImageSource>
+    <ImageSource x:Key="AddPng">pack://application:,,,/Resources/Icons/Add_64.png</ImageSource>
+    <ImageSource x:Key="DeleteIco">pack://application:,,,/Resources/Icons/DeleteIcon.ico</ImageSource>
+    <ImageSource x:Key="OpenAnotherFile.png">pack://application:,,,/Resources/Icons/OpenAnotherFile_64.png</ImageSource>
+    
+</ResourceDictionary>

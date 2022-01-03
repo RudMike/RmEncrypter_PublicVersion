@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="RmEncrypter_PublicVersion.Views.AccountDeleteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RmEncrypter_PublicVersion"
+             xmlns:viewmodels="clr-namespace:RmEncrypter_PublicVersion.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:AccountDeleteViewModel}"
+             d:DesignHeight="396" d:DesignWidth="344">
+    <Border Style="{StaticResource Border.StackPanel}">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top"
+                       Style="{StaticResource HeaderTextBlock}"
+                       Text="{DynamicResource AccountDelete}"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+            <Separator DockPanel.Dock="Top"/>
+
+            <Grid>
+                
+                <local:WaitingPanel>
+                    <i:Interaction.Behaviors>
+                        <local:ChangeVisibilityBehavior IsBusy="{Binding IsBusy}"
+                                                        CollapsedElement="{Binding ElementName=ContentGrid}"/>
+                    </i:Interaction.Behaviors>
+                </local:WaitingPanel>
+                
+                <Grid x:Name="ContentGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Margin="40,10,40,0">
+                        <TextBlock Text="{DynamicResource InputConfirm}"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Left"
+                                   Style="{StaticResource NormalText}"
+                                   Margin="5"/>
+                        <TextBox Margin="5" Text="{Binding ConfirmWord, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="40,0" Grid.Row="2">
+                        <Button Margin="5" Command="{Binding ContinueCommand}" Content="{DynamicResource Continue}" IsDefault="True"/>
+                        <Button Margin="5" Command="{Binding CancelCommand}" Content="{DynamicResource Cancel}" IsCancel="True"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </DockPanel>
+    </Border>
+</UserControl>
